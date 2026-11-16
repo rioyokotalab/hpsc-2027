@@ -1,3 +1,15 @@
 a.out
 vecadd
 *.o
+00_hello
+01_thread
+02_block
+03_if
+04_atomic
+05_memcpy
+06_shared
+07_devquery
+09_threads
+1?_acc_*
+!1?_acc_*.cpp
+job.sh.[oe]*

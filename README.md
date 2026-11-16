@@ -23,11 +23,15 @@ Student ID:
 
 ## Building on TSUBAME4.0
 
+Build on the login node and run on a GPU node with a short batch job:
+
 ```
-qrsh -g <group> -l gpu_1=1 -l h_rt=0:30:00
-module load cuda
 cd 02_gpu
-make 00_hello && ./a.out
+module load cuda
+make                                  # every CUDA program, nvcc -arch=sm_90
+qsub -g <group> job.sh                # Exercises 1-3 on one H100
+qsub -g <group> job.sh ./00_hello     # or one program
 ```
 
-The Makefiles target the H100 (`-arch=sm_90`); on another GPU use `make ARCH=sm_86 ...` or its own architecture.
+OpenACC programs: `module purge; module load nvhpc; make openacc` (the nvhpc and cuda modules conflict).
+The Makefiles target the H100 (`-arch=sm_90`, `-gpu=cc90`); on another GPU use `make ARCH=sm_86 ...` or its own architecture.
