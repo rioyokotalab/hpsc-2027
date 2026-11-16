@@ -1,3 +1,6 @@
 gemm
 reference
 steps.png
+gemm_bf16
+reference_bf16
+steps_bf16.png
