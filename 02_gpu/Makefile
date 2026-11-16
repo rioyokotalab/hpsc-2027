@@ -37,8 +37,12 @@ ACC = nvc++ -O3 -acc -gpu=cc90 -Minfo=accel
 	$(ACC) 13_acc_reduction.cpp -o 13_acc_reduction
 14_acc_matmul: 14_acc_matmul.cpp
 	$(ACC) 14_acc_matmul.cpp -o 14_acc_matmul
+15_acc_parallel: 15_acc_parallel.cpp
+	$(ACC) 15_acc_parallel.cpp -o 15_acc_parallel
+16_acc_kernels: 16_acc_kernels.cpp
+	$(ACC) 16_acc_kernels.cpp -o 16_acc_kernels
 
-openacc: 10_acc_vecadd 11_acc_gang 12_acc_data 13_acc_reduction 14_acc_matmul
+openacc: 10_acc_vecadd 11_acc_gang 12_acc_data 13_acc_reduction 14_acc_matmul 15_acc_parallel 16_acc_kernels
 
 clean:
-	rm -f 00_hello 01_thread 02_block 03_if 04_atomic 05_memcpy 06_shared 07_devquery vecadd 09_threads 10_acc_vecadd 11_acc_gang 12_acc_data 13_acc_reduction 14_acc_matmul a.out
+	rm -f 00_hello 01_thread 02_block 03_if 04_atomic 05_memcpy 06_shared 07_devquery vecadd 09_threads 10_acc_vecadd 11_acc_gang 12_acc_data 13_acc_reduction 14_acc_matmul 15_acc_parallel 16_acc_kernels a.out

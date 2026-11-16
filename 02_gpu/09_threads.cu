@@ -21,7 +21,7 @@ int main(void) {
   cudaEvent_t start, stop;
   cudaEventCreate(&start);
   cudaEventCreate(&stop);
-  for (int B=1; B<=1024; B*=2) {
+  for (int B=1; B<=4096; B*=2) {
     cudaMemset(c, 0, N*sizeof(float));
     add<<<B,M>>>(a, b, c, N); // warm-up
     cudaDeviceSynchronize();
