@@ -22,6 +22,7 @@ qsub -g <group> job.sh python 00_numpy.py           # CPU only, but time it on a
 qsub -g <group> job.sh                               # Exercises 1-2 and the matmul baseline (about 2 min)
 qsub -g <group> job.sh python check_silu_mul.py      # Exercise 4
 qsub -g <group> job.sh ./profile.sh python 09_profile.py   # Nsight Compute
+qsub -g <group> job.sh python check_rmsnorm.py       # Homework
 ```
 
 | File | What it shows |
@@ -36,4 +37,5 @@ qsub -g <group> job.sh ./profile.sh python 09_profile.py   # Nsight Compute
 | `07_inspect.py` | the PTX Triton generated for vector addition |
 | `08_silu_mul.py`, `check_silu_mul.py` | Exercise 4: a kernel written by your agent, and its check |
 | `09_profile.py`, `profile.sh` | Nsight Compute metrics for four kernels |
+| `10_rmsnorm.py`, `check_rmsnorm.py` | Homework: RMSNorm in one Triton kernel, and its check |
 | `bench.py` | timing with CUDA events |

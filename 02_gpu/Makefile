@@ -1,7 +1,7 @@
 ARCH = sm_90
 NVCC = nvcc -O3 -arch=$(ARCH)
 
-cuda: 00_hello 01_thread 02_block 03_if 04_atomic 05_memcpy 06_shared 07_devquery vecadd 09_threads
+cuda: 00_hello 01_thread 02_block 03_if 04_atomic 05_memcpy 06_shared 07_devquery vecadd 09_threads 17_bucket_sort
 
 00_hello: 00_hello.cu
 	$(NVCC) 00_hello.cu -o 00_hello
@@ -23,6 +23,8 @@ vecadd: 08_vecadd.cu
 	$(NVCC) 08_vecadd.cu -o vecadd
 09_threads: 09_threads.cu
 	$(NVCC) 09_threads.cu -o 09_threads
+17_bucket_sort: 17_bucket_sort.cu
+	$(NVCC) 17_bucket_sort.cu -o 17_bucket_sort
 
 # OpenACC: module purge; module load nvhpc  (nvhpc conflicts with the cuda module)
 ACC = nvc++ -O3 -acc -gpu=cc90 -Minfo=accel
@@ -45,4 +47,4 @@ ACC = nvc++ -O3 -acc -gpu=cc90 -Minfo=accel
 openacc: 10_acc_vecadd 11_acc_gang 12_acc_data 13_acc_reduction 14_acc_matmul 15_acc_parallel 16_acc_kernels
 
 clean:
-	rm -f 00_hello 01_thread 02_block 03_if 04_atomic 05_memcpy 06_shared 07_devquery vecadd 09_threads 10_acc_vecadd 11_acc_gang 12_acc_data 13_acc_reduction 14_acc_matmul 15_acc_parallel 16_acc_kernels a.out
+	rm -f 00_hello 01_thread 02_block 03_if 04_atomic 05_memcpy 06_shared 07_devquery vecadd 09_threads 10_acc_vecadd 11_acc_gang 12_acc_data 13_acc_reduction 14_acc_matmul 15_acc_parallel 16_acc_kernels 17_bucket_sort a.out
