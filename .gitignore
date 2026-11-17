@@ -14,3 +14,12 @@ vecadd
 !1?_acc_*.cpp
 job.sh.[oe]*
 __pycache__/
+04_cutlass_tk/thunderkittens/
+04_cutlass_tk/cutlass/
+04_cutlass_tk/build/
+04_cutlass_tk/00_cublas
+04_cutlass_tk/level_0?
+04_cutlass_tk/tk_h100
+04_cutlass_tk/10_cutlass_gemm
+04_cutlass_tk/30_linear_relu
+04_cutlass_tk/level_08_any
