@@ -13,3 +13,4 @@ vecadd
 1?_acc_*
 !1?_acc_*.cpp
 job.sh.[oe]*
+__pycache__/
