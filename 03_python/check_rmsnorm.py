@@ -10,9 +10,9 @@ def ref(x, w):
     return x / torch.sqrt((x * x).mean(dim=1, keepdim=True) + eps) * w
 ok = True
 
-def kernels(x, w):                         # names of the GPU kernels one call launches
+def kernels(f):                            # names of the GPU kernels one call launches
     with profile(activities=[ProfilerActivity.CUDA]) as p:
-        rmsnorm(x, w, eps)
+        f()
         torch.cuda.synchronize()
     return {e.name for e in p.events() if e.device_type.name == "CUDA"}
 
@@ -34,9 +34,10 @@ for dtype, tol in ((torch.float32, 1e-5), (torch.bfloat16, 1e-2)):
 M, N = 16384, 4096                         # 16,384 tokens of a model with hidden size 4,096
 x = torch.randn(M, N, device="cuda", dtype=torch.bfloat16)
 w = torch.randn(N, device="cuda", dtype=torch.bfloat16)
-names = kernels(x, w)
+names = kernels(lambda: rmsnorm(x, w, eps))
 others = {n for n in names if "at::" in n}    # kernels from PyTorch, not Triton
 print("GPU kernels:", ", ".join(sorted(names)))
+print("torch rms_norm kernels:", ", ".join(sorted(kernels(lambda: torch.nn.functional.rms_norm(x, (N,), w, eps)))))
 if others:
     ok = False
     print("FAIL: PyTorch kernels ran:", ", ".join(sorted(others)))
