@@ -16,9 +16,11 @@ make -j 8                                  # under a minute
 ## Run
 
 ```
-qsub -g <group> job.sh                     # Exercise 1: the staircase, about 30 s
+qsub -g <group> job.sh                     # the staircase at N = 4,096, about 30 s
+qsub -g <group> job.sh sh -c 'for L in 05 06 07 08; do ./level_$L 8192; done'   # Exercise 1
 qsub -g <group> job.sh ./10_cutlass_gemm 4096 8192
-qsub -g <group> job.sh ./level_08 4000     # outside the contract (Exercise 4)
+qsub -g <group> job.sh ./level_08 4000     # outside the contract
+qsub -g <group> job.sh ./level_08_any 4001 # Exercise 4, after cp build/level_08.cu level_08_any.cu; make level_08_any
 qsub -g <group> job.sh ./30_linear_relu    # homework
 ```
 
