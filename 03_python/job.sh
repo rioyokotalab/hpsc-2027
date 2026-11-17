@@ -2,7 +2,7 @@
 #$ -cwd
 #$ -l gpu_1=1
 #$ -l h_rt=0:08:00
-# Usage: qsub -g <group> job.sh                     runs Exercises 1-3
+# Usage: qsub -g <group> job.sh                     runs Exercises 1-2 and the matmul baseline
 #        qsub -g <group> job.sh python check_silu_mul.py   runs one program
 # Set up the environment once on the login node (see README.md).
 module load python/3.14.10
