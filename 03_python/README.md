@@ -17,7 +17,8 @@ pip install torch "numba-cuda[cu13]" cupy-cuda13x "numpy<2.5" matplotlib
 
 ```
 cd 03_python
-python 00_numpy.py                                   # CPU only: fine on the login node
+qsub -g <group> job.sh python 00_numpy.py           # CPU only, but time it on a compute node:
+                                                     # the shared login node gave 10x noisier numbers
 qsub -g <group> job.sh                               # Exercises 1-3 on one H100 (about 3 min)
 qsub -g <group> job.sh python check_silu_mul.py      # Exercise 4
 qsub -g <group> job.sh ./profile.sh python 09_profile.py   # Nsight Compute
