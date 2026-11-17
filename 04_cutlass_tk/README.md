@@ -10,7 +10,7 @@ git clone https://github.com/HazyResearch/ThunderKittens.git thunderkittens
 git -C thunderkittens checkout 67845f5fa48d05343dbbc1ba1403f11061f08d2d
 git clone --depth 1 --branch v4.8.1 https://github.com/NVIDIA/cutlass.git
 module load cuda
-make -j 8                                  # about 2 minutes
+make -j 8                                  # under a minute
 ```
 
 ## Run
