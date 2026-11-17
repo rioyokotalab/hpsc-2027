@@ -19,7 +19,7 @@ pip install torch "numba-cuda[cu13]" cupy-cuda13x "numpy<2.5" matplotlib
 cd 03_python
 qsub -g <group> job.sh python 00_numpy.py           # CPU only, but time it on a compute node:
                                                      # on the shared login node it was 100x slower
-qsub -g <group> job.sh                               # Exercises 1-3 on one H100 (about 3 min)
+qsub -g <group> job.sh                               # Exercises 1-2 and the matmul baseline (about 2 min)
 qsub -g <group> job.sh python check_silu_mul.py      # Exercise 4
 qsub -g <group> job.sh ./profile.sh python 09_profile.py   # Nsight Compute
 ```
