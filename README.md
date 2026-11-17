@@ -8,7 +8,7 @@ Student ID:
 | ---------- | ------------------------------------------- | ----------- |
 | Lecture 1  | Why HPC limits AI                           | 01_introduction |
 | Lecture 2  | GPU architecture and roofline               | 02_gpu      |
-| Lecture 3  | Kernels I: Triton / CUDA-Python             |             |
+| Lecture 3  | Kernels I: Triton / CUDA-Python             | 03_python   |
 | Lecture 4  | Kernels II: CUTLASS / ThunderKittens        |             |
 | Lecture 5  | Precision and numerics                      |             |
 | Lecture 6  | Node-level optimization and parallelism     |             |
