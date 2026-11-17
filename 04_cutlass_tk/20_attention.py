@@ -1,4 +1,4 @@
-# Attention on one H100: three PyTorch operations against fused kernels.
+# Attention on one H100: unfused PyTorch against fused kernels.
 # Run with the Lecture 3 environment: qsub -g <group> job.sh python 20_attention.py
 import torch
 import torch.nn.functional as F
@@ -26,7 +26,7 @@ for S in (1024, 4096, 8192):
     q, k, v = (torch.randn(B, H, S, D, device="cuda", dtype=torch.bfloat16) for _ in range(3))
     ref = naive(q.float(), k.float(), v.float())
     flops = 4 * B * H * S * S * D
-    rows = [("naive (3 ops)", lambda: naive(q, k, v))]
+    rows = [("unfused", lambda: naive(q, k, v))]
     for name, be in (("SDPA flash", SDPBackend.FLASH_ATTENTION), ("SDPA cuDNN", SDPBackend.CUDNN_ATTENTION),
                      ("SDPA efficient", SDPBackend.EFFICIENT_ATTENTION)):
         rows.append((name, lambda be=be: sdpa(q, k, v, be)))
