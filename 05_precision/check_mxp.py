@@ -13,10 +13,10 @@ def problem(N, seed=0):
 def scaled_residual(A, x, b):
     N = A.shape[0]
     r = (b - A @ x).abs().max()
-    return (r / (A.abs().sum(1).max() * x.abs().max() + b.abs().max()) / (N * torch.finfo(torch.float64).eps)).item()
+    return (r / (A.abs().sum(1).max() * x.abs().max() + b.abs().max()) / (N * 2.0**-53)).item()        # HPL: eps = 2^-53
 
 ok = True
-for N in (1000, 4096, 16384):                                 # small and odd sizes first
+for N in (1000, 5000, 16384):                                 # sizes that are not powers of two first
     A, b = problem(N, seed=N)
     x = mxp.solve(A, b)
     s = scaled_residual(A, x, b)
