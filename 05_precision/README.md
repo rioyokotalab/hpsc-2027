@@ -7,7 +7,7 @@ Everything uses PyTorch and Triton from the Lecture 3 environment (`~/hpsc-venv`
 
 ```
 cd 05_precision
-qsub -g <group> job.sh                              # Exercises 1-3 and every demo (about 70 s)
+qsub -g <group> job.sh                              # Exercises 1-3 and every demo (about 3 min)
 qsub -g <group> job.sh python check_candidates.py   # Exercise 4
 qsub -g <group> job.sh python check_mxp.py          # Homework
 ```
