@@ -53,3 +53,12 @@ h = torch.histc(g[g > 0].log2(), bins=24, min=-48, max=0).long().tolist()
 print("\nlog2 |gradient| histogram, bins of width 2 from -48 to 0:", " ".join(map(str, h)))
 print(f"9-layer MLP, FP32 gradients: {(g < 2**-25).float().mean().item():.1%} below 2^-25 (FP16 rounds them to 0), "
       f"{(g < 2**-14).float().mean().item():.1%} below 2^-14 (FP16 smallest normal)")
+
+# The same 9-layer MLP, one backward pass under FP16 autocast: how many weight gradients are lost?
+for mode in ("FP32", "FP16 autocast", "FP16 autocast + scaler (S = 65536)"):
+    deep.zero_grad()
+    with torch.autocast("cuda", dtype=torch.float16, enabled=mode != "FP32"):
+        loss = torch.nn.functional.mse_loss(deep(x).float(), y)
+    (loss * 65536 if "scaler" in mode else loss).backward()
+    g = torch.cat([p.grad.flatten() for p in deep.parameters() if p.dim() == 2])
+    print(f"{mode:36s}: {(g == 0).float().mean().item():6.1%} of the weight gradients are exactly 0")

@@ -27,3 +27,15 @@ for dt in (torch.float32, torch.bfloat16):
         r1 = X[:1] @ W
         diff = [((X[:B] @ W)[:1] != r1).float().mean().item() for B in (1, 8, 64, 512, 4096)]
         print(f"  {str(dt)[6:]:8s} K={K:5d} N={N:5d}  B = 1, 8, 64, 512, 4096: " + "  ".join(f"{d:.2f}" for d in diff))
+
+# Which cuBLAS kernel ran for each batch size?
+print("\nKernel chosen by cuBLAS for X[:B] @ W, K = 4096, N = 4096")
+for dt in (torch.float32, torch.bfloat16):
+    W = torch.randn(4096, 4096, device="cuda", dtype=dt)
+    X = torch.randn(4096, 4096, device="cuda", dtype=dt)
+    for B in (1, 8, 64, 512, 4096):
+        with torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CUDA]) as prof:
+            X[:B] @ W
+            torch.cuda.synchronize()
+        names = [e.key for e in prof.key_averages() if e.device_time_total > 0]
+        print(f"  {str(dt)[6:]:8s} B={B:5d}: {' + '.join(n[:70] for n in names)}")

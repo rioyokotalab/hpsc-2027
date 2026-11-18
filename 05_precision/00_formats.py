@@ -21,7 +21,7 @@ for dt, start in ((torch.bfloat16, 0), (torch.float16, 0), (torch.float32, 2**24
     print(f"{str(dt)[6:]:9s} counter stops at {s.item():.0f}")
 
 print("\nStagnation of an update: w = 1, then w += 0.001 one thousand times")
-for dt in (torch.bfloat16, torch.float32):
+for dt in (torch.bfloat16, torch.float16, torch.float32):
     w = torch.ones((), dtype=dt, device=dev)
     for _ in range(1000):
         w = w + 0.001

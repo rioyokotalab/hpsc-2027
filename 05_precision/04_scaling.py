@@ -45,11 +45,12 @@ print("\nFP8 GEMM, 8192^3: speed by scaling granularity")
 N = 8192
 A = torch.randn(N, N, device="cuda")
 B = torch.randn(N, N, device="cuda")
-f = lambda: None
 ta, tb = A.abs().max() / 448, B.abs().max() / 448
 x, y = (A / ta).to(torch.float8_e4m3fn), (B / tb).t().contiguous().to(torch.float8_e4m3fn).t()
 t = bench(lambda: torch._scaled_mm(x, y, scale_a=ta, scale_b=tb, out_dtype=torch.bfloat16))
-print(f"  per tensor   {2 * N**3 / t / 1e9:7.1f} TFLOP/s")
+print(f"  per tensor   {2 * N**3 / t / 1e9:7.1f} TFLOP/s  (default: partial sums promoted to FP32)")
+t = bench(lambda: torch._scaled_mm(x, y, scale_a=ta, scale_b=tb, out_dtype=torch.bfloat16, use_fast_accum=True))
+print(f"  per tensor   {2 * N**3 / t / 1e9:7.1f} TFLOP/s  (fast accumulation)")
 ra, rb = A.abs().amax(1, keepdim=True) / 448, B.abs().amax(0, keepdim=True) / 448
 x, y = (A / ra).to(torch.float8_e4m3fn), (B / rb).t().contiguous().to(torch.float8_e4m3fn).t()
 t = bench(lambda: torch._scaled_mm(x, y, scale_a=ra, scale_b=rb, out_dtype=torch.bfloat16))
