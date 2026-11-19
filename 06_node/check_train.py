@@ -4,8 +4,9 @@
 #        python check_train.py my_train.py
 import re, subprocess, sys, time
 
-REF = "ref_loss.txt"          # losses of 30_train.py on one H100 (step loss), made by: python check_train.py --ref
-TOL = 0.02                    # relative difference allowed per printed step
+REF = "ref_loss.txt"          # losses of 30_train.py on one H100, made with: python check_train.py --ref
+TOL = 0.05                    # relative difference allowed per printed step: two runs of the
+                              # template itself differ by up to 3 % (BF16, non-deterministic sums)
 
 prog = sys.argv[1]
 if prog == "--ref":
