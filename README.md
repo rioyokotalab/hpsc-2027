@@ -11,7 +11,7 @@ Student ID:
 | Lecture 3  | Kernels I: Triton / CUDA-Python             | 03_python   |
 | Lecture 4  | Kernels II: CUTLASS / ThunderKittens        | 04_cutlass_tk |
 | Lecture 5  | Precision and numerics                      | 05_precision |
-| Lecture 6  | Node-level optimization and parallelism     |             |
+| Lecture 6  | Node-level optimization and parallelism     | 06_node     |
 | Lecture 7  | Distributed training strategies             |             |
 | Lecture 8  | Interconnect and scaling measurement        |             |
 | Lecture 9  | Data pipeline and I/O                       |             |

@@ -23,3 +23,7 @@ __pycache__/
 04_cutlass_tk/10_cutlass_gemm
 04_cutlass_tk/30_linear_relu
 04_cutlass_tk/level_08_any
+06_node/00_hello
+06_node/01_race
+06_node/02_pi
+06_node/03_triad
