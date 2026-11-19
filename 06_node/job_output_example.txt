@@ -1,0 +1,97 @@
+# Output of job.sh on one TSUBAME4.0 node (node_f), 2026-11-19, for when your own job is still waiting in the queue.
+	GPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	CPU Affinity	NUMA Affinity	GPU NUMA ID
+GPU0	 X 	NV6	NV6	NV6	NODE	PIX	SYS	SYS	0-95,192-287	0		N/A
+GPU1	NV6	 X 	NV6	NV6	PIX	NODE	SYS	SYS	0-95,192-287	0		N/A
+GPU2	NV6	NV6	 X 	NV6	SYS	SYS	NODE	PIX	96-191,288-383	1		N/A
+GPU3	NV6	NV6	NV6	 X 	SYS	SYS	PIX	NODE	96-191,288-383	1		N/A
+NIC0	NODE	PIX	SYS	SYS	 X 	NODE	SYS	SYS				
+NIC1	PIX	NODE	SYS	SYS	NODE	 X 	SYS	SYS				
+NIC2	SYS	SYS	NODE	PIX	SYS	SYS	 X 	NODE				
+NIC3	SYS	SYS	PIX	NODE	SYS	SYS	NODE	 X 				
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+
+NIC Legend:
+
+  NIC0: mlx5_0
+  NIC1: mlx5_1
+  NIC2: mlx5_2
+  NIC3: mlx5_3
+
+=== 00_hello
+hello from thread 0 of 4
+hello from thread 3 of 4
+hello from thread 2 of 4
+hello from thread 1 of 4
+=== 01_race
+race      total =   3614972 (expected 100000000)  1.1887 s
+atomic    total = 100000000 (expected 100000000)  1.6554 s
+reduction total = 100000000 (expected 100000000)  0.0015 s
+=== 02_pi
+threads   1  pi = 3.141592653589676  2.4452 s
+threads   2  pi = 3.141592653589873  1.2236 s
+threads   4  pi = 3.141592653589754  0.6124 s
+threads   8  pi = 3.141592653589771  0.3069 s
+threads  16  pi = 3.141592653589812  0.1539 s
+threads  32  pi = 3.141592653589813  0.0776 s
+threads  64  pi = 3.141592653589816  0.0400 s
+threads  96  pi = 3.141592653589788  0.0290 s
+threads 128  pi = 3.141592653589814  0.0222 s
+threads 192  pi = 3.141592653589792  0.0170 s
+=== 03_triad
+threads   1  0.1512 s    42.6 GB/s
+threads   2  0.0566 s   113.9 GB/s
+threads   4  0.0301 s   214.3 GB/s
+threads   8  0.0165 s   390.6 GB/s
+threads  16  0.0106 s   607.9 GB/s
+threads  32  0.0092 s   700.9 GB/s
+threads  64  0.0081 s   796.3 GB/s
+threads  96  0.0084 s   763.0 GB/s
+threads 128  0.0116 s   555.6 GB/s
+threads 192  0.0088 s   734.8 GB/s
+=== 04_copy
+GPU 0 -> GPU 0..3 (GB/s):     -    133.0   133.0   133.0 
+GPU 1 -> GPU 0..3 (GB/s):  133.0      -    133.0   132.9 
+GPU 2 -> GPU 0..3 (GB/s):  133.0   132.9      -    133.0 
+GPU 3 -> GPU 0..3 (GB/s):  133.0   132.9   133.0      -  
+pinned host -> GPU 0: 57.5 GB/s
+GPU 0 -> pinned host: 53.8 GB/s
+=== 10_step
+GPT: 124.5 M parameters, 860 MFLOP per token, batch 16 x 1024 tokens
+eager                first step   21.1 s  step   60.3 ms    271598 tokens/s  MFU  23.6 %  peak memory  16.0 GiB  loss 10.9777
+                     880 kernels per step; GPU time (ms): matmul 16.9, attention 3.7, other 38.6
+eager + checkpoint   first step    0.6 s  step   68.9 ms    237627 tokens/s  MFU  20.7 %  peak memory  11.3 GiB  loss 10.9777
+                     1144 kernels per step; GPU time (ms): matmul 19.8, attention 4.8, other 43.1
+compile              first step   42.2 s  step   37.8 ms    432988 tokens/s  MFU  37.6 %  peak memory   8.4 GiB  loss 10.9777
+                     782 kernels per step; GPU time (ms): matmul 17.1, attention 3.8, other 16.1
+=== 20_allreduce
+all-reduce (sum, FP32) on 4 GPUs; busbw = algbw x 2(p-1)/p
+       4096 bytes       46.3 us  algbw    0.1 GB/s  busbw    0.1 GB/s
+      16384 bytes       26.3 us  algbw    0.6 GB/s  busbw    0.9 GB/s
+      65536 bytes       26.8 us  algbw    2.4 GB/s  busbw    3.7 GB/s
+     262144 bytes       26.2 us  algbw   10.0 GB/s  busbw   15.0 GB/s
+    1048576 bytes       28.1 us  algbw   37.3 GB/s  busbw   56.0 GB/s
+    4194304 bytes       39.8 us  algbw  105.3 GB/s  busbw  157.9 GB/s
+   16777216 bytes       99.7 us  algbw  168.2 GB/s  busbw  252.3 GB/s
+   67108864 bytes      340.1 us  algbw  197.3 GB/s  busbw  296.0 GB/s
+  268435456 bytes     1241.5 us  algbw  216.2 GB/s  busbw  324.3 GB/s
+ 1073741824 bytes     4809.1 us  algbw  223.3 GB/s  busbw  334.9 GB/s
+=== 21_ddp
+4 GPUs, batch B x 1024 tokens per GPU, gradients 498 MB in FP32
+batch 16  compute only (no all-reduce) step   60.5 ms   1084017 tokens/s  MFU  23.6 %
+batch 16  DDP, 25 MB buckets           step   65.0 ms   1008636 tokens/s  MFU  21.9 %
+batch 16  DDP, one bucket              step   64.6 ms   1014000 tokens/s  MFU  22.0 %
+batch  4  compute only (no all-reduce) step   18.3 ms    893154 tokens/s  MFU  19.4 %
+batch  4  DDP, 25 MB buckets           step   22.7 ms    722646 tokens/s  MFU  15.7 %
+batch  4  DDP, one bucket              step   22.3 ms    735869 tokens/s  MFU  16.0 %
+batch  1  compute only (no all-reduce) step   13.2 ms    309185 tokens/s  MFU   6.7 %
+batch  1  DDP, 25 MB buckets           step   17.8 ms    229963 tokens/s  MFU   5.0 %
+batch  1  DDP, one bucket              step   17.1 ms    239957 tokens/s  MFU   5.2 %

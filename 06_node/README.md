@@ -27,3 +27,5 @@ qsub -g <group> job.sh python check_train.py my_train.py                        
 | `20_allreduce.py` | NCCL all-reduce on 4 GPUs, 4 KiB to 1 GiB (Exercise 3) |
 | `21_ddp.py` | DistributedDataParallel on 4 GPUs: no all-reduce, 25 MB buckets, one bucket (Exercise 4) |
 | `30_train.py`, `check_train.py` | Homework: one training run on one node |
+| `ref_loss.txt` | losses of the template on one H100, used by `check_train.py` |
+| `job_output_example.txt` | output of `job.sh` on one node (2026-11-19), if your own job is still in the queue |
