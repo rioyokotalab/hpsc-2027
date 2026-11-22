@@ -12,7 +12,7 @@ Student ID:
 | Lecture 4  | Kernels II: CUTLASS / ThunderKittens        | 04_cutlass_tk |
 | Lecture 5  | Precision and numerics                      | 05_precision |
 | Lecture 6  | Node-level optimization and parallelism     | 06_node     |
-| Lecture 7  | Distributed training strategies             |             |
+| Lecture 7  | Distributed training strategies             | 07_distributed |
 | Lecture 8  | Interconnect and scaling measurement        |             |
 | Lecture 9  | Data pipeline and I/O                       |             |
 | Lecture 10 | Inference and serving                       |             |
@@ -51,6 +51,7 @@ git push origin main
 | 4 | `04_cutlass_tk/30_linear_relu.cu` |
 | 5 | `05_precision/10_mxp.py` |
 | 6 | `06_node/my_train.py` (start from a copy of `30_train.py`) |
+| 7 | `07_distributed/my_train.py` (start from a copy of `50_train.py`) |
 
 ## Building on TSUBAME4.0
 
