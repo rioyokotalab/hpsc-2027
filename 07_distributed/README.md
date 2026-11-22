@@ -8,7 +8,7 @@ The Python programs use the environment of Lecture 3 (`~/hpsc-venv`, see `../03_
 
 ```
 cd 07_distributed
-qsub -g <group> job.sh                                         # Exercises 1-4 and the ring-attention demo (one node, about 5 min)
+qsub -g <group> job.sh                                         # Exercises 1-4 and the ring-attention demo (one node, about 10 min)
 qsub -g <group> job.sh torchrun --standalone --nproc_per_node=4 10_memory.py fsdp 4096 32 32 4   # one other size
 qsub -g <group> job.sh python check_train.py my_train.py       # Homework
 ```
