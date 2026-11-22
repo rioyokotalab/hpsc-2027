@@ -1,0 +1,171 @@
+=== 00_collectives
+W1122 21:26:11.202000 63484 torch/distributed/run.py:982] 
+W1122 21:26:11.202000 63484 torch/distributed/run.py:982] *****************************************
+W1122 21:26:11.202000 63484 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:26:11.202000 63484 torch/distributed/run.py:982] *****************************************
+--- all_reduce
+all_reduce            65536 bytes      31.6 us algbw     2.1 GB/s busbw     3.1 GB/s
+all_reduce           262144 bytes      27.7 us algbw     9.5 GB/s busbw    14.2 GB/s
+all_reduce          1048576 bytes      28.4 us algbw    36.9 GB/s busbw    55.4 GB/s
+all_reduce          4194304 bytes      40.9 us algbw   102.5 GB/s busbw   153.7 GB/s
+all_reduce         16777216 bytes      96.6 us algbw   173.6 GB/s busbw   260.5 GB/s
+all_reduce         67108864 bytes     339.8 us algbw   197.5 GB/s busbw   296.2 GB/s
+all_reduce        268435456 bytes    1235.3 us algbw   217.3 GB/s busbw   326.0 GB/s
+all_reduce       1073741824 bytes    4781.6 us algbw   224.6 GB/s busbw   336.8 GB/s
+--- reduce_scatter
+reduce_scatter        65536 bytes      25.8 us algbw     2.5 GB/s busbw     1.9 GB/s
+reduce_scatter       262144 bytes      25.7 us algbw    10.2 GB/s busbw     7.7 GB/s
+reduce_scatter      1048576 bytes      26.2 us algbw    40.1 GB/s busbw    30.1 GB/s
+reduce_scatter      4194304 bytes      40.5 us algbw   103.5 GB/s busbw    77.6 GB/s
+reduce_scatter     16777216 bytes      58.7 us algbw   285.9 GB/s busbw   214.4 GB/s
+reduce_scatter     67108864 bytes     202.4 us algbw   331.6 GB/s busbw   248.7 GB/s
+reduce_scatter    268435456 bytes     714.2 us algbw   375.9 GB/s busbw   281.9 GB/s
+reduce_scatter   1073741824 bytes    2708.6 us algbw   396.4 GB/s busbw   297.3 GB/s
+--- all_gather
+all_gather            65536 bytes      24.4 us algbw     2.7 GB/s busbw     2.0 GB/s
+all_gather           262144 bytes      24.8 us algbw    10.6 GB/s busbw     7.9 GB/s
+all_gather          1048576 bytes      25.0 us algbw    42.0 GB/s busbw    31.5 GB/s
+all_gather          4194304 bytes      42.4 us algbw    98.8 GB/s busbw    74.1 GB/s
+all_gather         16777216 bytes      66.3 us algbw   252.9 GB/s busbw   189.7 GB/s
+all_gather         67108864 bytes     198.6 us algbw   338.0 GB/s busbw   253.5 GB/s
+all_gather        268435456 bytes     690.3 us algbw   388.9 GB/s busbw   291.6 GB/s
+all_gather       1073741824 bytes    2620.0 us algbw   409.8 GB/s busbw   307.4 GB/s
+--- all_to_all
+all_to_all            65536 bytes      37.7 us algbw     1.7 GB/s busbw     1.3 GB/s
+all_to_all           262144 bytes      86.3 us algbw     3.0 GB/s busbw     2.3 GB/s
+all_to_all          1048576 bytes      55.6 us algbw    18.9 GB/s busbw    14.2 GB/s
+all_to_all          4194304 bytes      55.6 us algbw    75.4 GB/s busbw    56.5 GB/s
+all_to_all         16777216 bytes      72.5 us algbw   231.5 GB/s busbw   173.6 GB/s
+all_to_all         67108864 bytes     186.8 us algbw   359.2 GB/s busbw   269.4 GB/s
+all_to_all        268435456 bytes     640.3 us algbw   419.2 GB/s busbw   314.4 GB/s
+all_to_all       1073741824 bytes    2673.2 us algbw   401.7 GB/s busbw   301.3 GB/s
+--- broadcast
+broadcast             65536 bytes      29.9 us algbw     2.2 GB/s busbw     2.2 GB/s
+broadcast            262144 bytes      29.5 us algbw     8.9 GB/s busbw     8.9 GB/s
+broadcast           1048576 bytes      29.3 us algbw    35.8 GB/s busbw    35.8 GB/s
+broadcast           4194304 bytes      29.9 us algbw   140.4 GB/s busbw   140.4 GB/s
+broadcast          16777216 bytes      78.8 us algbw   212.9 GB/s busbw   212.9 GB/s
+broadcast          67108864 bytes     223.6 us algbw   300.1 GB/s busbw   300.1 GB/s
+broadcast         268435456 bytes     833.4 us algbw   322.1 GB/s busbw   322.1 GB/s
+broadcast        1073741824 bytes    3211.6 us algbw   334.3 GB/s busbw   334.3 GB/s
+--- sendrecv
+sendrecv              65536 bytes      71.2 us algbw     0.9 GB/s busbw     0.9 GB/s
+sendrecv             262144 bytes      70.7 us algbw     3.7 GB/s busbw     3.7 GB/s
+sendrecv            1048576 bytes      70.2 us algbw    14.9 GB/s busbw    14.9 GB/s
+sendrecv            4194304 bytes      70.3 us algbw    59.7 GB/s busbw    59.7 GB/s
+sendrecv           16777216 bytes     168.3 us algbw    99.7 GB/s busbw    99.7 GB/s
+sendrecv           67108864 bytes     582.3 us algbw   115.3 GB/s busbw   115.3 GB/s
+sendrecv          268435456 bytes    2202.4 us algbw   121.9 GB/s busbw   121.9 GB/s
+sendrecv         1073741824 bytes    8659.0 us algbw   124.0 GB/s busbw   124.0 GB/s
+=== 10_memory
+W1122 21:26:57.982000 64505 torch/distributed/run.py:982] 
+W1122 21:26:57.982000 64505 torch/distributed/run.py:982] *****************************************
+W1122 21:26:57.982000 64505 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:26:57.982000 64505 torch/distributed/run.py:982] *****************************************
+=== ddp  d=1600 L=48 params 1.558 B  batch 4x1024 per GPU, 4 GPUs
+  model                  allocated  13.25 GB  peak  13.25 GB
+  step 1 forward         allocated  28.76 GB  peak  29.99 GB
+  step 1 backward        allocated  13.25 GB  peak  30.40 GB
+  step 1 optimizer       allocated  26.41 GB  peak  33.10 GB
+  steady state           allocated  26.50 GB  peak  43.62 GB
+  step   219.6 ms  MFU  20.3 %  loss 9.533
+W1122 21:28:28.480000 65479 torch/distributed/run.py:982] 
+W1122 21:28:28.480000 65479 torch/distributed/run.py:982] *****************************************
+W1122 21:28:28.480000 65479 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:28:28.480000 65479 torch/distributed/run.py:982] *****************************************
+=== zero1  d=1600 L=48 params 1.558 B  batch 4x1024 per GPU, 4 GPUs
+  model                  allocated  13.25 GB  peak  13.25 GB
+  step 1 forward         allocated  28.76 GB  peak  29.99 GB
+  step 1 backward        allocated  13.25 GB  peak  30.40 GB
+  step 1 optimizer       allocated  16.53 GB  peak  30.40 GB
+  steady state           allocated  16.53 GB  peak  33.67 GB
+  step   203.2 ms  MFU  21.9 %  loss 9.533
+W1122 21:28:55.330000 65832 torch/distributed/run.py:982] 
+W1122 21:28:55.330000 65832 torch/distributed/run.py:982] *****************************************
+W1122 21:28:55.330000 65832 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:28:55.330000 65832 torch/distributed/run.py:982] *****************************************
+=== fsdp  d=1600 L=48 params 1.558 B  batch 4x1024 per GPU, 4 GPUs
+  model                  allocated   1.59 GB  peak   1.67 GB
+  step 1 forward         allocated  12.56 GB  peak  14.02 GB
+  step 1 backward        allocated   3.18 GB  peak  14.43 GB
+  step 1 optimizer       allocated   4.71 GB  peak  14.43 GB
+  steady state           allocated   4.71 GB  peak  17.54 GB
+  step   153.2 ms  MFU  27.8 %  loss 9.560
+W1122 21:29:30.204000 66298 torch/distributed/run.py:982] 
+W1122 21:29:30.204000 66298 torch/distributed/run.py:982] *****************************************
+W1122 21:29:30.204000 66298 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:29:30.204000 66298 torch/distributed/run.py:982] *****************************************
+=== fsdp_noreshard  d=1600 L=48 params 1.558 B  batch 4x1024 per GPU, 4 GPUs
+  model                  allocated   1.59 GB  peak   1.67 GB
+  step 1 forward         allocated  15.72 GB  peak  17.02 GB
+  step 1 backward        allocated   3.18 GB  peak  17.37 GB
+  step 1 optimizer       allocated   4.71 GB  peak  17.37 GB
+  steady state           allocated   4.71 GB  peak  20.46 GB
+  step   147.9 ms  MFU  28.8 %  loss 9.560
+W1122 21:30:00.583000 66690 torch/distributed/run.py:982] 
+W1122 21:30:00.583000 66690 torch/distributed/run.py:982] *****************************************
+W1122 21:30:00.583000 66690 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:30:00.583000 66690 torch/distributed/run.py:982] *****************************************
+=== ddp  d=4096 L=32 params 6.654 B  batch 1x1024 per GPU, 4 GPUs
+  model                  allocated  54.88 GB  peak  54.88 GB
+  step 1 forward         allocated  73.25 GB  peak  73.56 GB
+  step 1 backward        allocated  54.88 GB  peak  73.88 GB
+  OUT OF MEMORY (CUDA out of memory. Tried to allocate 192.00 MiB. GPU 0 has a total capacity of 93.09 GiB )
+  at OOM                 allocated  97.04 GB  peak  97.04 GB
+W1122 21:30:26.433000 67098 torch/distributed/run.py:982] 
+W1122 21:30:26.433000 67098 torch/distributed/run.py:982] *****************************************
+W1122 21:30:26.433000 67098 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:30:26.433000 67098 torch/distributed/run.py:982] *****************************************
+=== fsdp  d=4096 L=32 params 6.654 B  batch 1x1024 per GPU, 4 GPUs
+  model                  allocated   6.65 GB  peak   6.86 GB
+  step 1 forward         allocated  11.18 GB  peak  12.31 GB
+  step 1 backward        allocated  13.31 GB  peak  15.84 GB
+  step 1 optimizer       allocated  19.96 GB  peak  33.27 GB
+  steady state           allocated  19.96 GB  peak  33.27 GB
+  step   271.3 ms  MFU  15.8 %  loss 6.319
+=== 20_tensor_parallel
+W1122 21:30:57.192000 67503 torch/distributed/run.py:982] 
+W1122 21:30:57.192000 67503 torch/distributed/run.py:982] *****************************************
+W1122 21:30:57.192000 67503 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:30:57.192000 67503 torch/distributed/run.py:982] *****************************************
+d  2048 tokens  1024  1 GPU   0.108 ms  TP4 compute   0.033 ms  all-reduce   0.042 ms  TP4 total   0.093 ms  speed-up 1.16  max|diff| 0.0156 (max|Z| 3.47)  AR bytes 4.2 MB
+d  2048 tokens  8192  1 GPU   0.830 ms  TP4 compute   0.212 ms  all-reduce   0.181 ms  TP4 total   0.404 ms  speed-up 2.06  max|diff| 0.0312 (max|Z| 3.53)  AR bytes 33.6 MB
+d  4096 tokens  1024  1 GPU   0.386 ms  TP4 compute   0.105 ms  all-reduce   0.063 ms  TP4 total   0.174 ms  speed-up 2.21  max|diff| 0.0156 (max|Z| 4)  AR bytes 8.4 MB
+d  4096 tokens  8192  1 GPU   3.138 ms  TP4 compute   0.866 ms  all-reduce   0.350 ms  TP4 total   1.224 ms  speed-up 2.56  max|diff| 0.0312 (max|Z| 3.64)  AR bytes 67.1 MB
+d  8192 tokens  1024  1 GPU   1.451 ms  TP4 compute   0.400 ms  all-reduce   0.107 ms  TP4 total   0.523 ms  speed-up 2.77  max|diff| 0.0156 (max|Z| 3.47)  AR bytes 16.8 MB
+d  8192 tokens  8192  1 GPU  12.284 ms  TP4 compute   3.100 ms  all-reduce   0.651 ms  TP4 total   3.757 ms  speed-up 3.27  max|diff| 0.0312 (max|Z| 3.59)  AR bytes 134.2 MB
+AVG instead of SUM: ratio to full 0.250
+=== 30_pipeline
+W1122 21:31:19.754000 67856 torch/distributed/run.py:982] 
+W1122 21:31:19.754000 67856 torch/distributed/run.py:982] *****************************************
+W1122 21:31:19.754000 67856 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:31:19.754000 67856 torch/distributed/run.py:982] *****************************************
+[rank2]:W1122 21:31:39.168000 67948 torch/_logging/_internal.py:1407] Pipeline parallelism is using an eager NCCL communicator. Consider creating its process group with backend="nccl-lazy" so peer communicators are initialized lazily and traffic to different peers can overlap.
+[rank1]:W1122 21:31:39.168000 67947 torch/_logging/_internal.py:1407] Pipeline parallelism is using an eager NCCL communicator. Consider creating its process group with backend="nccl-lazy" so peer communicators are initialized lazily and traffic to different peers can overlap.
+[rank3]:W1122 21:31:39.452000 67949 torch/_logging/_internal.py:1407] Pipeline parallelism is using an eager NCCL communicator. Consider creating its process group with backend="nccl-lazy" so peer communicators are initialized lazily and traffic to different peers can overlap.
+pipeline: 32 blocks d=2048, 4 stages of 8 blocks, global batch 32x1024
+[rank0]:W1122 21:31:39.469000 67946 torch/_logging/_internal.py:1407] Pipeline parallelism is using an eager NCCL communicator. Consider creating its process group with backend="nccl-lazy" so peer communicators are initialized lazily and traffic to different peers can overlap.
+GPipe  microbatches  1 (size 32)  step    656.9 ms  peak GB per stage  21.1  20.5  20.5  43.6
+GPipe  microbatches  2 (size 16)  step    447.2 ms  peak GB per stage  20.8  20.1  20.1  37.0
+GPipe  microbatches  4 (size  8)  step    344.4 ms  peak GB per stage  20.6  20.0  20.0  33.7
+GPipe  microbatches  8 (size  4)  step    298.6 ms  peak GB per stage  20.4  19.8  19.8  32.0
+GPipe  microbatches 16 (size  2)  step    291.8 ms  peak GB per stage  20.4  19.8  19.8  31.2
+GPipe  microbatches 32 (size  1)  step    328.0 ms  peak GB per stage  20.8  20.0  20.0  31.1
+1F1B   microbatches  4 (size  8)  step    345.8 ms  peak GB per stage  20.6  16.5  12.2  16.8
+1F1B   microbatches  8 (size  4)  step    300.2 ms  peak GB per stage  12.8   9.9   7.7  12.1
+1F1B   microbatches 16 (size  2)  step    292.6 ms  peak GB per stage   8.5   6.6   5.5  10.8
+1F1B   microbatches 32 (size  1)  step    327.7 ms  peak GB per stage   6.3   4.9   4.4  10.8
+one microbatch of 32: forward+backward per stage ms  156.9  155.2  154.6  218.2
+one microbatch of 16: forward+backward per stage ms   79.4   77.8   77.7  111.4
+one microbatch of  8: forward+backward per stage ms   41.4   40.2   40.1   56.1
+one microbatch of  4: forward+backward per stage ms   21.4   20.9   20.7   29.4
+one microbatch of  2: forward+backward per stage ms   12.1   11.7   11.5   16.0
+one microbatch of  1: forward+backward per stage ms    7.8    7.4    7.2    9.7
+=== 40_ring_attention
+W1122 21:32:19.688000 68480 torch/distributed/run.py:982] 
+W1122 21:32:19.688000 68480 torch/distributed/run.py:982] *****************************************
+W1122 21:32:19.688000 68480 torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1122 21:32:19.688000 68480 torch/distributed/run.py:982] *****************************************
+S   8192: ring on 4 GPUs     6.88 ms (peak   1.3 GB)  SDPA on 1 GPU     0.83 ms  max|diff| 1.46e-03  K,V block 17 MB per step
+S  32768: ring on 4 GPUs    98.61 ms (peak  18.0 GB)  SDPA on 1 GPU    12.78 ms  max|diff| 6.10e-04  K,V block 67 MB per step
+S  65536: ring on 4 GPUs   391.51 ms (peak  70.3 GB)  SDPA on 1 GPU    55.52 ms  max|diff| 4.88e-04  K,V block 134 MB per step

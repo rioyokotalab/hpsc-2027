@@ -2,7 +2,7 @@
 #$ -cwd
 #$ -l node_f=1
 #$ -l h_rt=0:15:00
-# Usage: qsub -g <group> job.sh                                   runs Exercises 1-4 and the demo (about 10 min)
+# Usage: qsub -g <group> job.sh                                   runs Exercises 1-4 and the demo (about 8 min)
 #        qsub -g <group> job.sh python check_train.py my_train.py  runs one command
 # One full node: 4 H100s joined by NVLink. Uses the Python environment of Lecture 3 (see ../03_python/README.md).
 module load python/3.14.10
