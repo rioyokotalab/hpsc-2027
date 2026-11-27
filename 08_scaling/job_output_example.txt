@@ -1,0 +1,292 @@
+=== nodes
+r9n7
+r10n5
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV6	NV6	NV6	NODE	PIX	SYS	SYS	0-95,192-287	0		N/A
+GPU1	NV6	 X 	NV6	NV6	PIX	NODE	SYS	SYS	0-95,192-287	0		N/A
+GPU2	NV6	NV6	 X 	NV6	SYS	SYS	NODE	PIX	96-191,288-383	1		N/A
+GPU3	NV6	NV6	NV6	 X 	SYS	SYS	PIX	NODE	96-191,288-383	1		N/A
+NIC0	NODE	PIX	SYS	SYS	 X 	NODE	SYS	SYS				
+NIC1	PIX	NODE	SYS	SYS	NODE	 X 	SYS	SYS				
+NIC2	SYS	SYS	NODE	PIX	SYS	SYS	 X 	NODE				
+NIC3	SYS	SYS	PIX	NODE	SYS	SYS	NODE	 X 				
+=== 00_pingpong
+# rank 0 <-> rank 1: inside a node
+pingpong inside a node           4 bytes one-way     22.12 us    0.00 GB/s
+pingpong inside a node          16 bytes one-way     21.91 us    0.00 GB/s
+pingpong inside a node          64 bytes one-way     23.78 us    0.00 GB/s
+pingpong inside a node         256 bytes one-way     21.58 us    0.01 GB/s
+pingpong inside a node        1024 bytes one-way     24.08 us    0.04 GB/s
+pingpong inside a node        4096 bytes one-way     21.17 us    0.19 GB/s
+pingpong inside a node       16384 bytes one-way     21.19 us    0.77 GB/s
+pingpong inside a node       65536 bytes one-way     25.63 us    2.56 GB/s
+pingpong inside a node      262144 bytes one-way     25.72 us   10.19 GB/s
+pingpong inside a node     1048576 bytes one-way     27.03 us   38.79 GB/s
+pingpong inside a node     4194304 bytes one-way     59.26 us   70.78 GB/s
+pingpong inside a node    16777216 bytes one-way    165.56 us  101.33 GB/s
+pingpong inside a node    67108864 bytes one-way    582.24 us  115.26 GB/s
+pingpong inside a node   268435456 bytes one-way   2167.06 us  123.87 GB/s
+pingpong inside a node  1073741824 bytes one-way   8581.30 us  125.13 GB/s
+# rank 0 <-> rank 4: between nodes
+pingpong between nodes           4 bytes one-way     26.35 us    0.00 GB/s
+pingpong between nodes          16 bytes one-way     26.77 us    0.00 GB/s
+pingpong between nodes          64 bytes one-way     27.08 us    0.00 GB/s
+pingpong between nodes         256 bytes one-way     26.19 us    0.01 GB/s
+pingpong between nodes        1024 bytes one-way     27.96 us    0.04 GB/s
+pingpong between nodes        4096 bytes one-way     25.88 us    0.16 GB/s
+pingpong between nodes       16384 bytes one-way     25.68 us    0.64 GB/s
+pingpong between nodes       65536 bytes one-way     24.75 us    2.65 GB/s
+pingpong between nodes      262144 bytes one-way     31.32 us    8.37 GB/s
+pingpong between nodes     1048576 bytes one-way     64.81 us   16.18 GB/s
+pingpong between nodes     4194304 bytes one-way    192.98 us   21.73 GB/s
+pingpong between nodes    16777216 bytes one-way    700.95 us   23.94 GB/s
+pingpong between nodes    67108864 bytes one-way   2733.41 us   24.55 GB/s
+pingpong between nodes   268435456 bytes one-way  10858.65 us   24.72 GB/s
+pingpong between nodes  1073741824 bytes one-way  43357.34 us   24.76 GB/s
+=== 10_allreduce
+# 8 GPUs, two nodes (4 + 4)
+allreduce p=8          16 bytes      27.64 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8          32 bytes      27.30 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8          64 bytes      27.35 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8         128 bytes      26.85 us algbw    0.00 busbw    0.01 GB/s
+allreduce p=8         256 bytes      27.27 us algbw    0.01 busbw    0.02 GB/s
+allreduce p=8         512 bytes      26.57 us algbw    0.02 busbw    0.03 GB/s
+allreduce p=8        1024 bytes      26.42 us algbw    0.04 busbw    0.07 GB/s
+allreduce p=8        2048 bytes      24.36 us algbw    0.08 busbw    0.15 GB/s
+allreduce p=8        4096 bytes      26.73 us algbw    0.15 busbw    0.27 GB/s
+allreduce p=8        8192 bytes      30.25 us algbw    0.27 busbw    0.47 GB/s
+allreduce p=8       16384 bytes      41.69 us algbw    0.39 busbw    0.69 GB/s
+allreduce p=8       32768 bytes      42.49 us algbw    0.77 busbw    1.35 GB/s
+allreduce p=8       65536 bytes      44.01 us algbw    1.49 busbw    2.61 GB/s
+allreduce p=8      131072 bytes      44.80 us algbw    2.93 busbw    5.12 GB/s
+allreduce p=8      262144 bytes      45.83 us algbw    5.72 busbw   10.01 GB/s
+allreduce p=8      524288 bytes      54.54 us algbw    9.61 busbw   16.82 GB/s
+allreduce p=8     1048576 bytes      73.21 us algbw   14.32 busbw   25.07 GB/s
+allreduce p=8     2097152 bytes      94.69 us algbw   22.15 busbw   38.76 GB/s
+allreduce p=8     4194304 bytes     146.18 us algbw   28.69 busbw   50.21 GB/s
+allreduce p=8     8388608 bytes     194.39 us algbw   43.15 busbw   75.52 GB/s
+allreduce p=8    16777216 bytes     353.26 us algbw   47.49 busbw   83.11 GB/s
+allreduce p=8    33554432 bytes     694.48 us algbw   48.32 busbw   84.55 GB/s
+allreduce p=8    67108864 bytes    1192.72 us algbw   56.27 busbw   98.46 GB/s
+allreduce p=8   134217728 bytes    1756.14 us algbw   76.43 busbw  133.75 GB/s
+allreduce p=8   268435456 bytes    3292.98 us algbw   81.52 busbw  142.66 GB/s
+allreduce p=8   536870912 bytes    6343.08 us algbw   84.64 busbw  148.12 GB/s
+allreduce p=8  1073741824 bytes   12475.45 us algbw   86.07 busbw  150.62 GB/s
+# 4 GPUs, one node
+allreduce p=4          16 bytes      23.73 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=4          32 bytes      23.46 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=4          64 bytes      23.43 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=4         128 bytes      23.53 us algbw    0.01 busbw    0.01 GB/s
+allreduce p=4         256 bytes      23.49 us algbw    0.01 busbw    0.02 GB/s
+allreduce p=4         512 bytes      23.41 us algbw    0.02 busbw    0.03 GB/s
+allreduce p=4        1024 bytes      23.55 us algbw    0.04 busbw    0.07 GB/s
+allreduce p=4        2048 bytes      29.57 us algbw    0.07 busbw    0.10 GB/s
+allreduce p=4        4096 bytes      23.79 us algbw    0.17 busbw    0.26 GB/s
+allreduce p=4        8192 bytes      24.04 us algbw    0.34 busbw    0.51 GB/s
+allreduce p=4       16384 bytes      24.14 us algbw    0.68 busbw    1.02 GB/s
+allreduce p=4       32768 bytes      24.29 us algbw    1.35 busbw    2.02 GB/s
+allreduce p=4       65536 bytes      24.64 us algbw    2.66 busbw    3.99 GB/s
+allreduce p=4      131072 bytes      24.57 us algbw    5.33 busbw    8.00 GB/s
+allreduce p=4      262144 bytes      25.16 us algbw   10.42 busbw   15.63 GB/s
+allreduce p=4      524288 bytes      24.90 us algbw   21.06 busbw   31.59 GB/s
+allreduce p=4     1048576 bytes      25.06 us algbw   41.84 busbw   62.76 GB/s
+allreduce p=4     2097152 bytes      27.22 us algbw   77.06 busbw  115.59 GB/s
+allreduce p=4     4194304 bytes      40.38 us algbw  103.88 busbw  155.82 GB/s
+allreduce p=4     8388608 bytes      59.66 us algbw  140.61 busbw  210.91 GB/s
+allreduce p=4    16777216 bytes      98.02 us algbw  171.16 busbw  256.74 GB/s
+allreduce p=4    33554432 bytes     180.99 us algbw  185.39 busbw  278.08 GB/s
+allreduce p=4    67108864 bytes     336.97 us algbw  199.15 busbw  298.73 GB/s
+allreduce p=4   134217728 bytes     636.60 us algbw  210.84 busbw  316.25 GB/s
+allreduce p=4   268435456 bytes    1229.94 us algbw  218.25 busbw  327.38 GB/s
+allreduce p=4   536870912 bytes    2415.58 us algbw  222.25 busbw  333.38 GB/s
+allreduce p=4  1073741824 bytes    4782.16 us algbw  224.53 busbw  336.80 GB/s
+# 2 GPUs, one node
+allreduce p=2          16 bytes      26.20 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=2          32 bytes      22.97 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=2          64 bytes      23.06 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=2         128 bytes      22.98 us algbw    0.01 busbw    0.01 GB/s
+allreduce p=2         256 bytes      23.01 us algbw    0.01 busbw    0.01 GB/s
+allreduce p=2         512 bytes      23.09 us algbw    0.02 busbw    0.02 GB/s
+allreduce p=2        1024 bytes      23.24 us algbw    0.04 busbw    0.04 GB/s
+allreduce p=2        2048 bytes      23.02 us algbw    0.09 busbw    0.09 GB/s
+allreduce p=2        4096 bytes      23.26 us algbw    0.18 busbw    0.18 GB/s
+allreduce p=2        8192 bytes      26.05 us algbw    0.31 busbw    0.31 GB/s
+allreduce p=2       16384 bytes      23.27 us algbw    0.70 busbw    0.70 GB/s
+allreduce p=2       32768 bytes      23.64 us algbw    1.39 busbw    1.39 GB/s
+allreduce p=2       65536 bytes      23.88 us algbw    2.74 busbw    2.74 GB/s
+allreduce p=2      131072 bytes      23.67 us algbw    5.54 busbw    5.54 GB/s
+allreduce p=2      262144 bytes      23.75 us algbw   11.04 busbw   11.04 GB/s
+allreduce p=2      524288 bytes      24.13 us algbw   21.73 busbw   21.73 GB/s
+allreduce p=2     1048576 bytes      29.11 us algbw   36.02 busbw   36.02 GB/s
+allreduce p=2     2097152 bytes      37.21 us algbw   56.35 busbw   56.35 GB/s
+allreduce p=2     4194304 bytes      56.17 us algbw   74.67 busbw   74.67 GB/s
+allreduce p=2     8388608 bytes      95.04 us algbw   88.26 busbw   88.26 GB/s
+allreduce p=2    16777216 bytes     179.78 us algbw   93.32 busbw   93.32 GB/s
+allreduce p=2    33554432 bytes     341.51 us algbw   98.25 busbw   98.25 GB/s
+allreduce p=2    67108864 bytes     655.65 us algbw  102.36 busbw  102.36 GB/s
+allreduce p=2   134217728 bytes    1269.00 us algbw  105.77 busbw  105.77 GB/s
+allreduce p=2   268435456 bytes    2414.46 us algbw  111.18 busbw  111.18 GB/s
+allreduce p=2   536870912 bytes    4736.58 us algbw  113.35 busbw  113.35 GB/s
+allreduce p=2  1073741824 bytes    9116.41 us algbw  117.78 busbw  117.78 GB/s
+# 2 GPUs, two nodes (1 + 1)
+allreduce p=2          16 bytes      26.09 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=2          32 bytes      26.03 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=2          64 bytes      26.19 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=2         128 bytes      26.29 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=2         256 bytes      25.87 us algbw    0.01 busbw    0.01 GB/s
+allreduce p=2         512 bytes      26.19 us algbw    0.02 busbw    0.02 GB/s
+allreduce p=2        1024 bytes      26.61 us algbw    0.04 busbw    0.04 GB/s
+allreduce p=2        2048 bytes      26.30 us algbw    0.08 busbw    0.08 GB/s
+allreduce p=2        4096 bytes      26.58 us algbw    0.15 busbw    0.15 GB/s
+allreduce p=2        8192 bytes      26.38 us algbw    0.31 busbw    0.31 GB/s
+allreduce p=2       16384 bytes      26.99 us algbw    0.61 busbw    0.61 GB/s
+allreduce p=2       32768 bytes      25.15 us algbw    1.30 busbw    1.30 GB/s
+allreduce p=2       65536 bytes      29.64 us algbw    2.21 busbw    2.21 GB/s
+allreduce p=2      131072 bytes      37.61 us algbw    3.48 busbw    3.48 GB/s
+allreduce p=2      262144 bytes      63.73 us algbw    4.11 busbw    4.11 GB/s
+allreduce p=2      524288 bytes      55.86 us algbw    9.39 busbw    9.39 GB/s
+allreduce p=2     1048576 bytes      81.93 us algbw   12.80 busbw   12.80 GB/s
+allreduce p=2     2097152 bytes     132.84 us algbw   15.79 busbw   15.79 GB/s
+allreduce p=2     4194304 bytes     251.65 us algbw   16.67 busbw   16.67 GB/s
+allreduce p=2     8388608 bytes     416.51 us algbw   20.14 busbw   20.14 GB/s
+allreduce p=2    16777216 bytes     823.30 us algbw   20.38 busbw   20.38 GB/s
+allreduce p=2    33554432 bytes    1624.50 us algbw   20.66 busbw   20.66 GB/s
+allreduce p=2    67108864 bytes    3235.21 us algbw   20.74 busbw   20.74 GB/s
+allreduce p=2   134217728 bytes    6447.18 us algbw   20.82 busbw   20.82 GB/s
+allreduce p=2   268435456 bytes   12870.48 us algbw   20.86 busbw   20.86 GB/s
+allreduce p=2   536870912 bytes   25742.36 us algbw   20.86 busbw   20.86 GB/s
+allreduce p=2  1073741824 bytes   51508.77 us algbw   20.85 busbw   20.85 GB/s
+# 4 GPUs, two nodes (2 + 2)
+allreduce p=4          16 bytes      26.36 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=4          32 bytes      26.63 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=4          64 bytes      26.21 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=4         128 bytes      26.51 us algbw    0.00 busbw    0.01 GB/s
+allreduce p=4         256 bytes      25.97 us algbw    0.01 busbw    0.01 GB/s
+allreduce p=4         512 bytes      26.30 us algbw    0.02 busbw    0.03 GB/s
+allreduce p=4        1024 bytes      29.28 us algbw    0.03 busbw    0.05 GB/s
+allreduce p=4        2048 bytes      26.15 us algbw    0.08 busbw    0.12 GB/s
+allreduce p=4        4096 bytes      26.63 us algbw    0.15 busbw    0.23 GB/s
+allreduce p=4        8192 bytes      26.84 us algbw    0.31 busbw    0.46 GB/s
+allreduce p=4       16384 bytes      27.58 us algbw    0.59 busbw    0.89 GB/s
+allreduce p=4       32768 bytes      32.48 us algbw    1.01 busbw    1.51 GB/s
+allreduce p=4       65536 bytes      34.64 us algbw    1.89 busbw    2.84 GB/s
+allreduce p=4      131072 bytes      43.71 us algbw    3.00 busbw    4.50 GB/s
+allreduce p=4      262144 bytes      66.69 us algbw    3.93 busbw    5.90 GB/s
+allreduce p=4      524288 bytes      58.39 us algbw    8.98 busbw   13.47 GB/s
+allreduce p=4     1048576 bytes      71.51 us algbw   14.66 busbw   22.00 GB/s
+allreduce p=4     2097152 bytes     101.25 us algbw   20.71 busbw   31.07 GB/s
+allreduce p=4     4194304 bytes     172.72 us algbw   24.28 busbw   36.43 GB/s
+allreduce p=4     8388608 bytes     317.94 us algbw   26.38 busbw   39.58 GB/s
+allreduce p=4    16777216 bytes     600.30 us algbw   27.95 busbw   41.92 GB/s
+allreduce p=4    33554432 bytes    1124.27 us algbw   29.85 busbw   44.77 GB/s
+allreduce p=4    67108864 bytes    2155.49 us algbw   31.13 busbw   46.70 GB/s
+allreduce p=4   134217728 bytes    4211.10 us algbw   31.87 busbw   47.81 GB/s
+allreduce p=4   268435456 bytes    8327.72 us algbw   32.23 busbw   48.35 GB/s
+allreduce p=4   536870912 bytes   11834.46 us algbw   45.37 busbw   68.05 GB/s
+allreduce p=4  1073741824 bytes   23555.52 us algbw   45.58 busbw   68.38 GB/s
+# NCCL_ALGO=Ring
+# 8 GPUs, two nodes (4 + 4)
+allreduce p=8          16 bytes      38.61 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8          32 bytes      30.25 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8          64 bytes      31.71 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8         128 bytes      34.43 us algbw    0.00 busbw    0.01 GB/s
+allreduce p=8         256 bytes      34.62 us algbw    0.01 busbw    0.01 GB/s
+allreduce p=8         512 bytes      34.86 us algbw    0.01 busbw    0.03 GB/s
+allreduce p=8        1024 bytes      35.29 us algbw    0.03 busbw    0.05 GB/s
+allreduce p=8        2048 bytes      35.90 us algbw    0.06 busbw    0.10 GB/s
+allreduce p=8        4096 bytes      36.02 us algbw    0.11 busbw    0.20 GB/s
+allreduce p=8        8192 bytes      36.92 us algbw    0.22 busbw    0.39 GB/s
+allreduce p=8       16384 bytes      38.57 us algbw    0.42 busbw    0.74 GB/s
+allreduce p=8       32768 bytes      42.57 us algbw    0.77 busbw    1.35 GB/s
+allreduce p=8       65536 bytes      45.69 us algbw    1.43 busbw    2.51 GB/s
+allreduce p=8      131072 bytes      53.34 us algbw    2.46 busbw    4.30 GB/s
+allreduce p=8      262144 bytes      65.84 us algbw    3.98 busbw    6.97 GB/s
+allreduce p=8      524288 bytes      71.51 us algbw    7.33 busbw   12.83 GB/s
+allreduce p=8     1048576 bytes      76.98 us algbw   13.62 busbw   23.84 GB/s
+allreduce p=8     2097152 bytes      87.00 us algbw   24.11 busbw   42.19 GB/s
+allreduce p=8     4194304 bytes     121.52 us algbw   34.51 busbw   60.40 GB/s
+allreduce p=8     8388608 bytes     202.66 us algbw   41.39 busbw   72.44 GB/s
+allreduce p=8    16777216 bytes     371.17 us algbw   45.20 busbw   79.10 GB/s
+allreduce p=8    33554432 bytes     693.86 us algbw   48.36 busbw   84.63 GB/s
+allreduce p=8    67108864 bytes    1281.50 us algbw   52.37 busbw   91.64 GB/s
+allreduce p=8   134217728 bytes    2533.13 us algbw   52.99 busbw   92.72 GB/s
+allreduce p=8   268435456 bytes    4938.83 us algbw   54.35 busbw   95.12 GB/s
+allreduce p=8   536870912 bytes    9723.64 us algbw   55.21 busbw   96.62 GB/s
+allreduce p=8  1073741824 bytes   19359.41 us algbw   55.46 busbw   97.06 GB/s
+# NCCL_ALGO=Tree
+# 8 GPUs, two nodes (4 + 4)
+allreduce p=8          16 bytes      33.88 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8          32 bytes      27.50 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8          64 bytes      31.74 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8         128 bytes      35.04 us algbw    0.00 busbw    0.01 GB/s
+allreduce p=8         256 bytes      28.50 us algbw    0.01 busbw    0.02 GB/s
+allreduce p=8         512 bytes      27.20 us algbw    0.02 busbw    0.03 GB/s
+allreduce p=8        1024 bytes      27.18 us algbw    0.04 busbw    0.07 GB/s
+allreduce p=8        2048 bytes      27.11 us algbw    0.08 busbw    0.13 GB/s
+allreduce p=8        4096 bytes      27.53 us algbw    0.15 busbw    0.26 GB/s
+allreduce p=8        8192 bytes      31.48 us algbw    0.26 busbw    0.46 GB/s
+allreduce p=8       16384 bytes      28.67 us algbw    0.57 busbw    1.00 GB/s
+allreduce p=8       32768 bytes      28.78 us algbw    1.14 busbw    1.99 GB/s
+allreduce p=8       65536 bytes      30.09 us algbw    2.18 busbw    3.81 GB/s
+allreduce p=8      131072 bytes      38.45 us algbw    3.41 busbw    5.97 GB/s
+allreduce p=8      262144 bytes      44.83 us algbw    5.85 busbw   10.23 GB/s
+allreduce p=8      524288 bytes      54.46 us algbw    9.63 busbw   16.85 GB/s
+allreduce p=8     1048576 bytes      74.73 us algbw   14.03 busbw   24.55 GB/s
+allreduce p=8     2097152 bytes     111.64 us algbw   18.79 busbw   32.87 GB/s
+allreduce p=8     4194304 bytes     138.75 us algbw   30.23 busbw   52.90 GB/s
+allreduce p=8     8388608 bytes     193.89 us algbw   43.26 busbw   75.71 GB/s
+allreduce p=8    16777216 bytes     354.14 us algbw   47.37 busbw   82.91 GB/s
+allreduce p=8    33554432 bytes     691.92 us algbw   48.49 busbw   84.87 GB/s
+allreduce p=8    67108864 bytes    1191.15 us algbw   56.34 busbw   98.59 GB/s
+allreduce p=8   134217728 bytes    1759.93 us algbw   76.26 busbw  133.46 GB/s
+allreduce p=8   268435456 bytes    3292.80 us algbw   81.52 busbw  142.66 GB/s
+allreduce p=8   536870912 bytes    6366.59 us algbw   84.33 busbw  147.57 GB/s
+allreduce p=8  1073741824 bytes   15387.54 us algbw   69.78 busbw  122.11 GB/s
+# NCCL_IB_HCA==mlx5_1 (one NIC)
+# 8 GPUs, two nodes (4 + 4)
+allreduce p=8          16 bytes      27.68 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8          32 bytes      28.44 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8          64 bytes      28.12 us algbw    0.00 busbw    0.00 GB/s
+allreduce p=8         128 bytes      27.28 us algbw    0.00 busbw    0.01 GB/s
+allreduce p=8         256 bytes      29.13 us algbw    0.01 busbw    0.02 GB/s
+allreduce p=8         512 bytes      27.62 us algbw    0.02 busbw    0.03 GB/s
+allreduce p=8        1024 bytes      27.69 us algbw    0.04 busbw    0.06 GB/s
+allreduce p=8        2048 bytes      27.61 us algbw    0.07 busbw    0.13 GB/s
+allreduce p=8        4096 bytes      28.57 us algbw    0.14 busbw    0.25 GB/s
+allreduce p=8        8192 bytes      30.99 us algbw    0.26 busbw    0.46 GB/s
+allreduce p=8       16384 bytes      27.84 us algbw    0.59 busbw    1.03 GB/s
+allreduce p=8       32768 bytes      32.65 us algbw    1.00 busbw    1.76 GB/s
+allreduce p=8       65536 bytes      41.63 us algbw    1.57 busbw    2.75 GB/s
+allreduce p=8      131072 bytes      51.63 us algbw    2.54 busbw    4.44 GB/s
+allreduce p=8      262144 bytes      70.34 us algbw    3.73 busbw    6.52 GB/s
+allreduce p=8      524288 bytes      77.44 us algbw    6.77 busbw   11.85 GB/s
+allreduce p=8     1048576 bytes     107.63 us algbw    9.74 busbw   17.05 GB/s
+allreduce p=8     2097152 bytes     186.39 us algbw   11.25 busbw   19.69 GB/s
+allreduce p=8     4194304 bytes     341.42 us algbw   12.28 busbw   21.50 GB/s
+allreduce p=8     8388608 bytes     647.27 us algbw   12.96 busbw   22.68 GB/s
+allreduce p=8    16777216 bytes    1072.45 us algbw   15.64 busbw   27.38 GB/s
+allreduce p=8    33554432 bytes    1948.54 us algbw   17.22 busbw   30.14 GB/s
+allreduce p=8    67108864 bytes    3797.92 us algbw   17.67 busbw   30.92 GB/s
+allreduce p=8   134217728 bytes    5838.57 us algbw   22.99 busbw   40.23 GB/s
+allreduce p=8   268435456 bytes   11520.59 us algbw   23.30 busbw   40.78 GB/s
+allreduce p=8   536870912 bytes   22853.96 us algbw   23.49 busbw   41.11 GB/s
+allreduce p=8  1073741824 bytes   45476.49 us algbw   23.61 busbw   41.32 GB/s
+=== 20_scaling
+scaling p=1 params 1558 M batch 1/GPU (1 total): step    110.5 ms  no_sync    102.8 ms  allreduce(fp32 grads 6.23 GB)     0.0 ms  tokens/s       9263  MFU   9.6 %
+scaling p=1 params 1558 M batch 2/GPU (2 total): step    132.3 ms  no_sync    125.7 ms  allreduce(fp32 grads 6.23 GB)     0.0 ms  tokens/s      15477  MFU  16.1 %
+scaling p=1 params 1558 M batch 4/GPU (4 total): step    182.7 ms  no_sync    175.6 ms  allreduce(fp32 grads 6.23 GB)     0.0 ms  tokens/s      22424  MFU  23.3 %
+scaling p=1 params 1558 M batch 8/GPU (8 total): step    281.7 ms  no_sync    275.3 ms  allreduce(fp32 grads 6.23 GB)     0.0 ms  tokens/s      29083  MFU  30.2 %
+scaling p=2 params 1558 M batch 1/GPU (2 total): step    171.4 ms  no_sync    103.0 ms  allreduce(fp32 grads 6.23 GB)    51.9 ms  tokens/s      11946  MFU   6.2 %
+scaling p=2 params 1558 M batch 2/GPU (4 total): step    194.6 ms  no_sync    126.0 ms  allreduce(fp32 grads 6.23 GB)    51.9 ms  tokens/s      21051  MFU  10.9 %
+scaling p=2 params 1558 M batch 4/GPU (8 total): step    244.5 ms  no_sync    176.0 ms  allreduce(fp32 grads 6.23 GB)    51.9 ms  tokens/s      33499  MFU  17.4 %
+scaling p=2 params 1558 M batch 8/GPU (16 total): step    343.3 ms  no_sync    275.1 ms  allreduce(fp32 grads 6.23 GB)    51.9 ms  tokens/s      47721  MFU  24.8 %
+scaling p=4 params 1558 M batch 1/GPU (4 total): step    142.2 ms  no_sync    103.8 ms  allreduce(fp32 grads 6.23 GB)    27.8 ms  tokens/s      28804  MFU   7.5 %
+scaling p=4 params 1558 M batch 2/GPU (8 total): step    165.3 ms  no_sync    126.6 ms  allreduce(fp32 grads 6.23 GB)    27.8 ms  tokens/s      49552  MFU  12.9 %
+scaling p=4 params 1558 M batch 4/GPU (16 total): step    215.4 ms  no_sync    176.5 ms  allreduce(fp32 grads 6.23 GB)    27.8 ms  tokens/s      76047  MFU  19.8 %
+scaling p=4 params 1558 M batch 8/GPU (32 total): step    314.7 ms  no_sync    275.5 ms  allreduce(fp32 grads 6.23 GB)    27.8 ms  tokens/s     104108  MFU  27.1 %
+scaling p=8 params 1558 M batch 1/GPU (8 total): step    232.6 ms  no_sync    103.7 ms  allreduce(fp32 grads 6.23 GB)    71.7 ms  tokens/s      35221  MFU   4.6 %
+scaling p=8 params 1558 M batch 2/GPU (16 total): step    256.0 ms  no_sync    126.7 ms  allreduce(fp32 grads 6.23 GB)    71.7 ms  tokens/s      64008  MFU   8.3 %
+scaling p=8 params 1558 M batch 4/GPU (32 total): step    306.2 ms  no_sync    176.5 ms  allreduce(fp32 grads 6.23 GB)    71.7 ms  tokens/s     107007  MFU  13.9 %
+scaling p=8 params 1558 M batch 8/GPU (64 total): step    406.6 ms  no_sync    275.7 ms  allreduce(fp32 grads 6.23 GB)    71.7 ms  tokens/s     161198  MFU  21.0 %
+scaling p=4 params 355 M batch 16/GPU (64 total): step    146.0 ms  no_sync    136.7 ms  allreduce(fp32 grads 1.42 GB)     6.4 ms  tokens/s     448956  MFU  27.6 %
+scaling p=8 params 355 M batch 16/GPU (128 total): step    166.2 ms  no_sync    136.7 ms  allreduce(fp32 grads 1.42 GB)    16.6 ms  tokens/s     788737  MFU  24.2 %

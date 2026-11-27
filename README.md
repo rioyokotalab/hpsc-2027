@@ -13,7 +13,7 @@ Student ID:
 | Lecture 5  | Precision and numerics                      | 05_precision |
 | Lecture 6  | Node-level optimization and parallelism     | 06_node     |
 | Lecture 7  | Distributed training strategies             | 07_distributed |
-| Lecture 8  | Interconnect and scaling measurement        |             |
+| Lecture 8  | Interconnect and scaling measurement        | 08_scaling  |
 | Lecture 9  | Data pipeline and I/O                       |             |
 | Lecture 10 | Inference and serving                       |             |
 | Lecture 11 | RL / agent training compute                 |             |
@@ -52,6 +52,7 @@ git push origin main
 | 5 | `05_precision/10_mxp.py` |
 | 6 | `06_node/my_train.py` (start from a copy of `30_train.py`) |
 | 7 | `07_distributed/my_train.py` (start from a copy of `50_train.py`) |
+| 8 | `08_scaling/my_model.py` (start from a copy of `30_model.py`) and `08_scaling/homework.md` |
 
 ## Building on TSUBAME4.0
 
